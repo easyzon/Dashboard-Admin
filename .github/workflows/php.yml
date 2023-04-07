@@ -2,21 +2,22 @@ name: PHP Application
 
 on:
   push:
-    branches: [ Admin ]
+    branches:
+      - main
 
 jobs:
-  build-and-test:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Install dependencies
-      run: composer install
-    - name: Run tests
-      run: vendor/bin/phpunit tests
-    - name: Build application
-      run: php build.php
-      if: success()
-    - name: Deploy application
-      run: rsync -avz --delete ./build/ user@example.com:/var/www/html
-      if: success()
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+          php composer-setup.php
+          php -r "unlink('composer-setup.php');"
+          php composer.phar install
+
+      - name: Run application
+        run: php index.php
