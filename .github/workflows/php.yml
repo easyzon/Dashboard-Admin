@@ -2,7 +2,7 @@ name: PHP Application
 
 on:
   push:
-    branches: [ main ]
+    branches: [ Admin ]
 
 jobs:
   build-and-test:
