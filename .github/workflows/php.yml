@@ -1,16 +1,22 @@
-name: PHP Script
+name: PHP Application
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  run-script:
+  build-and-test:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress --no-suggest
-    - name: Run script
-      run: php path/to/script.php
+    - name: Run tests
+      run: vendor/bin/phpunit tests
+    - name: Build application
+      run: php build.php
+      if: success()
+    - name: Deploy application
+      run: rsync -avz --delete ./build/ user@example.com:/var/www/html
+      if: success()
