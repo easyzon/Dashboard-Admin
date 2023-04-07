@@ -16,7 +16,7 @@ include('include/header.php');
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Services</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white " href="../pages/billing.html">
+          <a class="nav-link text-white " href="service.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">receipt_long</i>
             </div>
@@ -36,21 +36,21 @@ include('include/header.php');
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Users</h6>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white active bg-gradient-primary" href="user.php">
+          <a class="nav-link text-white active bg-gradient-primary" href="view-user.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">View User's</span>
           </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white" href="user.php">
+        <!-- <li class="nav-item">
+          <a class="nav-link text-white" href="user-profile.php">
             <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
               <i class="material-icons opacity-10">table_view</i>
             </div>
             <span class="nav-link-text ms-1">Edit User</span>
           </a>
-        </li>
+        </li> -->
         <!-- Users End -->
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Payment</h6>

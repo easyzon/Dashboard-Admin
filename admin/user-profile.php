@@ -1,5 +1,12 @@
 <?php
+session_start();
+include_once('../includes/config.php');
 include('include/header.php');
+if (strlen($_SESSION['adminid'] == 0)) {
+    header('location:logout.php');
+} else {
+
+
 ?>
 <style>
     .form-control {
@@ -21,7 +28,7 @@ include('include/header.php');
     <hr class="horizontal light mt-0 mb-2">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
         <ul class="navbar-nav">
-        
+
             <li class="nav-item mt-3">
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Services</h6>
             </li>
@@ -57,7 +64,7 @@ include('include/header.php');
                 <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Users</h6>
             </li>
             <li class="nav-item">
-                <a class="nav-link text-white" href="view-user.php">
+                <a class="nav-link text-white" href="user.php">
                     <div class="text-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="material-icons opacity-10">table_view</i>
                     </div>
@@ -214,7 +221,7 @@ include('include/header.php');
                                             </h6>
                                             <p class="text-xs text-secondary mb-0">
                                                 <i class="fa fa-clock me-1"></i>
-                             f                   2 days
+                                                f 2 days
                                             </p>
                                         </div>
                                     </div>
@@ -230,9 +237,6 @@ include('include/header.php');
     <div class="container-fluid py-4">
         <div class="row">
 
-
-
-
         </div>
 
         <div class="row mb-4">
@@ -244,55 +248,57 @@ include('include/header.php');
                             <div class="row">
                                 <!-- <div class="col-md-12"> -->
                                 <!-- <div class="card"> -->
+                                <?php
+                        $userid = $_GET['uid'];
+                        $query = mysqli_query($con, "select * from users where id='$userid'");
+                        while ($result = mysqli_fetch_array($query)) { ?>
                                 <div class="card-header">
-                                    <h4>Add Category</h4>
+                                    <h4>  <?php echo $result['fname']; ?>'s Profile</h4>
                                 </div>
                                 <div class="card-body">
-                                <form action="../config/code.php" method="get" enctype="multipart/form-data">
+                                    <div class="col-md-12">
+                                                <button  href="edit-profile.php?uid=<?php echo $result['id']; ?>">Edit</button>
+                                    
+                                            </div>    
                                     <div class="row">
                                             <div class="col-md-6">
-                                                <label for="">Name</label>
-                                                <input type="text" name="name" placeholder="Category Name" class="form-control">
+                                                <label >First Name</label>
+                                    
                                             </div>
                                             <div class="col-md-6">
-                                                <label for="">Slug</label>
-                                                <input type="text" name="slug" placeholder="Slug Name"class="form-control">
+                                            <?php echo $result['fname']; ?>
                                             </div>
-                                            <div class="col-md-12">
-                                                <label for="">Description</label>
-                                                <textarea type="text"  rows="3"name="description" placeholder="Description "class="form-control"></textarea>
+                                            <div class="col-md-6">
+                                                <label for="">Last Name</label>
+                                            
                                             </div>
-                                            <div class="col-md-12">
-                                                <label for="">Upload Image</label>
-                                                <input type="file" name="image" class="form-control">
+                                            <div class="col-md-6">
+                                            <?php echo $result['lname']; ?>
                                             </div>
-                                            <div class="col-md-12">
-                                                <label for="">Meta Title</label>
-                                                <input type="text" name="meta_title" placeholder="Meta Title"class="form-control">
+                                            <!-- Last Name End -->
+                                            <div class="col-md-6">
+                                                <label for="">Email</label>
+                                        
                                             </div>
-                                            <div class="col-md-12">
-                                                <label for="">Meta Description</label>
-                                                <textarea type="text" rows="3" name="meta_description" placeholder="Meta Description"class="form-control"></textarea>
+                                            <div class="col-md-6">
+                                            <?php echo $result['email']; ?>
                                             </div>
-                                            <div class="col-md-12">
-                                                <label for="">Meta Keywords</label>
-                                                <input type="text"  name="meta_keywords" placeholder="Meta Keywords"class="form-control">
+                                            <div class="col-md-6">
+                                                <label for="">Contact No.</label>
+                                            
                                             </div>
-                                            <div class="col-md-3">
-                                                <label for="">Status</label>
-                                                <input type="checkbox" name="status">
+                                            <div class="col-md-6">
+                                            <?php echo $result['contactno']; ?>
                                             </div>
-                                            <div class="col-md-3">
-                                                <label for="">Popular</label>
-                                                <input type="checkbox" name="popular">
+                                            <div class="col-md-6">
+                                                <label for="">Reg. Date</label>
                                             </div>
-                                            <div class="col-md-12">
-                                                <button type="submit" class="btn btn-primary" name="add_category_btn">Save</button>
+                                            <div class="col-md-6">
+                                            <?php echo $result['posting_date']; ?>
                                             </div>
                                         </div>
-                                    </div>
-                                </form>
-                            
+                                </div>
+                                <?php } ?>
                             </div>
                         </div>
                     </div>
@@ -370,44 +376,7 @@ include('include/header.php');
                 </div>
             </div>
         </div>
-        <footer class="footer py-4  ">
-            <div class="container-fluid">
-                <div class="row align-items-center justify-content-lg-between">
-                    <div class="col-lg-6 mb-lg-0 mb-4">
-                        <div class="copyright text-center text-sm text-muted text-lg-start">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script>,
-                            made with <i class="fa fa-heart"></i> by
-                            <a href="https://www.creative-tim.com" class="font-weight-bold" target="_blank">Creative
-                                Tim</a>
-                            for a better web.
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <ul class="nav nav-footer justify-content-center justify-content-lg-end">
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com" class="nav-link text-muted"
-                                    target="_blank">Creative Tim</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/presentation" class="nav-link text-muted"
-                                    target="_blank">About Us</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/blog" class="nav-link text-muted"
-                                    target="_blank">Blog</a>
-                            </li>
-                            <li class="nav-item">
-                                <a href="https://www.creative-tim.com/license" class="nav-link pe-0 text-muted"
-                                    target="_blank">License</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </footer>
+
     </div>
 </main>
 
@@ -418,3 +387,4 @@ include('include/header.php');
 <?php
 include('include/footer.php');
 ?>
+<?php } ?>

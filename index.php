@@ -25,7 +25,7 @@ include('include/header.php');
             <li class="col-auto">Become a Seller</li>
         </ul>
         <a  href="login.php"  class="d-none d-sm-block text-white col-auto my-auto text-end fs-6 fw-semibold">Sign In</a>
-        <a href="register.php" class="join-btn col-auto my-auto text-white text-end fs-6 px-3 py-1 fw-semibold border border-1 border-white rounded-2"  data-toggle="modal" data-target="#AddUser" >Join</a>
+        <a href="signup.php" class="join-btn col-auto my-auto text-white text-end fs-6 px-3 py-1 fw-semibold border border-1 border-white rounded-2"  data-toggle="modal" data-target="#AddUser" >Join</a>
     </div>
     
 </nav>
